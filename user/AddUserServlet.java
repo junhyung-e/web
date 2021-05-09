@@ -1,4 +1,4 @@
-package kr.mjc.junhyung.web.model1.user;
+package kr.mjc.junhyung.web.model2.user;
 
 import kr.mjc.junhyung.web.dao.User;
 import kr.mjc.junhyung.web.dao.UserDao;
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/model1/user/addUser")
+@WebServlet("/model2/user/addUser")
 public class AddUserServlet extends HttpServlet {
 
     @Autowired
@@ -29,10 +29,10 @@ public class AddUserServlet extends HttpServlet {
 
         try {
             userDao.addUser(user);
-            response.sendRedirect(request.getContextPath() + "/model1/user/userList");
+            response.sendRedirect(request.getContextPath() + "/model2/user/userList");
         } catch (DuplicateKeyException e) {
             response.sendRedirect(request.getContextPath() +
-                    "/model1/user/userForm?msg=Duplicate email");
+                    "/model2/user/userForm?msg=Duplicate email");
         }
     }
 }

@@ -1,4 +1,4 @@
-package kr.mjc.junhyung.web.model1.user;
+package kr.mjc.junhyung.web.model2.user;
 
 import kr.mjc.junhyung.web.dao.User;
 import kr.mjc.junhyung.web.dao.UserDao;
@@ -10,10 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
-@WebServlet("/model1/user/userList")
+@WebServlet("/model2/user/userList")
 public class UserListServlet extends HttpServlet {
 
     @Autowired
@@ -22,13 +21,10 @@ public class UserListServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
         List<User> userList = userDao.listUsers(0, 100);
-        out.println("<html><body><h3>사용자 목록</h3>");
-        for (User user : userList)
-            out.format("<p>%s</p>\n", user);
-        out.println("</body></html>");
-        out.close();
+        request.setAttribute("userList", userList);
+
+        request.getRequestDispatcher("/WEB-INF/jsp/model2/user/userList.jsp")
+                .forward(request, response);
     }
 }
